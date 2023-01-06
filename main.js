@@ -105,7 +105,7 @@ function getQuestions()
   }
 
 
-  myrequest.open('GET','https://abdessamadziani.github.io/quizz-app/questions.json',true)
+  myrequest.open('GET','questions.json',true)
   myrequest.send()
 
 }

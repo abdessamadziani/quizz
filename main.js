@@ -9,6 +9,7 @@ let footer=document.querySelector(".footer")
 let count_down_element=document.querySelector(".taiming")
 let progress_bar=document.querySelector(".child")
 let container_bar=document.querySelector(".container")
+let radios=document.getElementsByName("rbtn")
 let counter
 let current_question
 let array=[]
@@ -20,6 +21,9 @@ let array=[]
 // let name=document.querySelector(".name")
 
 let name_txt=document.createElement("h2")
+
+
+
 
 
 let cookie_name=document.cookie.split("=")
@@ -44,13 +48,26 @@ function getQuestions()
         let nb_questions=question_object.length
         let all_questions = question_object.sort(()=>Math.random() - 0.5);
         console.log(all_questions);
-        //randoom(nb_questions,question_object)
-        // let right_answer_q=question_object[current_index].right_answer
-        //console.log(nb_questions)
+  
         createBullets(nb_questions)
         addQuestion(question_object[current_index],nb_questions)
         countDown(30,nb_questions)
+        btn_Next.style.display="none"
+
+       for(let i=0;i<radios.length;i++)
+       {
+        document.addEventListener('change',()=>{
+          if(radios[i].checked)
+         btn_Next.style.display="block"
+
+         })
+       }
+    
+
         btn_Next.onclick=()=>{
+          btn_Next.style.display="none"
+
+         
           let right_answer_q=question_object[current_index].right_answer
           // current_index++
           clearInterval(counter)
@@ -58,7 +75,9 @@ function getQuestions()
            current_question=question_object[current_index].title
        
           checkAnswer(right_answer_q,nb_questions,current_question)
+      
               current_index++
+  
 
           if(current_index<nb_questions)
           {
@@ -86,7 +105,7 @@ function getQuestions()
   }
 
 
-  myrequest.open('GET','questions.json',true)
+  myrequest.open('GET','/quizz-app/questions.json',true)
   myrequest.send()
 
 }
@@ -146,11 +165,13 @@ if(current_index<q_count)
 }
 function checkAnswer(r_answer,q_count,question)
 {
-  let radios=document.getElementsByName("rbtn")
-  let chosen_answer
+   let chosen_answer
+
   for(let i=0;i<radios.length;i++)
   {
-    if(radios[i].checked)
+   
+  
+     if(radios[i].checked)
         {
         chosen_answer=radios[i].getAttribute("data")
         }
@@ -164,15 +185,7 @@ function checkAnswer(r_answer,q_count,question)
     //  console.log(right_questions_count)
    
   }
-  else
-  {
-   
-
-
-     console.log(chosen_answer)
-    // console.log(array)
-    // console.log("right of this "+r_answer)
-    if(chosen_answer==undefined)
+  else if(chosen_answer==undefined)
     {
       res_area.innerHTML+=`<span style="display:block;color:blue; background-color:white;padding:10px;width:80%">${current_index+1}-${question}</span>`
       res_area.innerHTML+=`<span style="display:block;color:white; background-color:red; padding:10px;width:80%" >You didn't choose anything</span>`
@@ -187,18 +200,6 @@ function checkAnswer(r_answer,q_count,question)
       res_area.innerHTML+=`<span style="display:block;color:white; background-color:green;padding:10px;width:80% ">${r_answer}</span> <br><br>`
     }
    
-
-  }
- 
-
- 
-  // console.log("chosen answer is " +chosen_answer)
-  // console.log("right answer is" +r_answer)
-
-  // console.log("rbtn nb is" +radios.length)
-  // console.log(r_answer)
-
-
 
 }
 

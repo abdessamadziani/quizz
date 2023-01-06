@@ -105,7 +105,7 @@ function getQuestions()
   }
 
 
-  myrequest.open('GET','/quizz-app/questions.json',true)
+  myrequest.open('GET','/quizz/questions.json',true)
   myrequest.send()
 
 }

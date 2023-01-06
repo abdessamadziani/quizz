@@ -105,7 +105,7 @@ function getQuestions()
   }
 
 
-  myrequest.open('GET','https://abdessamadziani.github.io/quizz/questions.json',true)
+  myrequest.open('GET','https://abdessamadziani.github.io/quizz-app/questions.json',true)
   myrequest.send()
 
 }
@@ -313,4 +313,3 @@ function randoom(q_count,questions){
   }
 }
 
-console.log(array)

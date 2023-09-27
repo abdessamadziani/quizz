@@ -27,8 +27,9 @@ let name_txt=document.createElement("h2")
 
 
 let cookie_name=document.cookie.split("=")
-name_txt=document.createTextNode("Welcome "+cookie_name[1])
+ name_txt=document.createTextNode("Welcome "+cookie_name[3])
 document.getElementById("txt_val").appendChild(name_txt)
+
 
 
 
